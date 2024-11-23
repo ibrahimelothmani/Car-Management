@@ -15,6 +15,10 @@ import { CarStartComponent } from './cars/car-start/car-start.component';
 import { CarDetailComponent } from './cars/car-detail/car-detail.component';
 import { CarEditComponent } from './cars/car-edit/car-edit.component';
 import { CarsComponent } from './cars/cars.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { AboutComponent } from './about/about.component';
+import { ContactComponent } from './contact/contact.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +32,11 @@ import { CarsComponent } from './cars/cars.component';
     CarStartComponent,
     CarDetailComponent,
     CarEditComponent,
-    CarsComponent
+    CarsComponent,
+    LoginComponent,
+    RegisterComponent,
+    AboutComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,
