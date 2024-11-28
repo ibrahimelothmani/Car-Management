@@ -1,64 +1,76 @@
-<form class="row g-3 needs-validation" novalidate>
-    <div class="col-md-4">
-      <label for="validationCustom01" class="form-label">First name</label>
-      <input type="text" class="form-control" id="validationCustom01" value="Mark" required>
-      <div class="valid-feedback">
-        Looks good!
-      </div>
-    </div>
-    <div class="col-md-4">
-      <label for="validationCustom02" class="form-label">Last name</label>
-      <input type="text" class="form-control" id="validationCustom02" value="Otto" required>
-      <div class="valid-feedback">
-        Looks good!
-      </div>
-    </div>
-    <div class="col-md-4">
-      <label for="validationCustomUsername" class="form-label">Username</label>
-      <div class="input-group has-validation">
-        <span class="input-group-text" id="inputGroupPrepend">&#64;</span>//+
-        <input type="text" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required>
-        <div class="invalid-feedback">
-          Please choose a username.
-        </div>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <label for="validationCustom03" class="form-label">City</label>
-      <input type="text" class="form-control" id="validationCustom03" required>
-      <div class="invalid-feedback">
-        Please provide a valid city.
-      </div>
-    </div>
-    <div class="col-md-3">
-      <label for="validationCustom04" class="form-label">State</label>
-      <select class="form-select" id="validationCustom04" required>
-        <option selected disabled value="">Choose...</option>
-        <option>...</option>
-      </select>
-      <div class="invalid-feedback">
-        Please select a valid state.
-      </div>
-    </div>
-    <div class="col-md-3">
-      <label for="validationCustom05" class="form-label">Zip</label>
-      <input type="text" class="form-control" id="validationCustom05" required>
-      <div class="invalid-feedback">
-        Please provide a valid zip.
-      </div>
-    </div>
-    <div class="col-12">
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-        <label class="form-check-label" for="invalidCheck">
-          Agree to terms and conditions
-        </label>
-        <div class="invalid-feedback">
-          You must agree before submitting.
-        </div>
-      </div>
-    </div>
-    <div class="col-12">
-      <button class="btn btn-primary" type="submit">Submit form</button>
-    </div>
-  </form>
+        <!-- main-area -->
+        <main>
+
+          <!-- breadcrumb-area -->
+          <section class="breadcrumb-area breadcrumb-bg" data-background="img/bg/breadcrumb_bg.jpg">
+              <div class="container">
+                  <div class="row">
+                      <div class="col-12">
+                          <div class="breadcrumb-content text-center">
+                              <h2>Register</h2>
+                              <nav aria-label="breadcrumb">
+                                  <ol class="breadcrumb">
+                                      <li class="breadcrumb-item"><a routerLink="/register">Home</a></li>
+                                      <li class="breadcrumb-item active" aria-current="page">Register</li>
+                                  </ol>
+                              </nav>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </section>
+          <!-- breadcrumb-area-end -->
+          <!-- login-register-area -->
+          <section class="login-register-area gray-lite pb-120">
+              <div class="container">
+                  <div class="login-reg-wrap">
+                      <div class="row no-gutters">
+                          <div class="col-lg-12">
+                              <div class="login-wrap reg-wrap">
+                                  <h3 class="widget-title">Register</h3>
+                                  <form action="#" class="login-form">
+                                      <div class="row">
+                                          <div class="col-md-6">
+                                              <div class="form-grp">
+                                                  <label for="userName">Username <span>*</span></label>
+                                                  <input type="text" id="userName" placeholder="Jon Deo">
+                                              </div>
+                                          </div>
+                                          <div class="col-md-6">
+                                              <div class="form-grp">
+                                                  <label for="password2">Your Password <span>*</span></label>
+                                                  <input type="password" id="password2" placeholder="*****">
+                                              </div>
+                                          </div>
+                                          <div class="col-md-6">
+                                              <div class="form-grp">
+                                                  <label for="email">Email <span>*</span></label>
+                                                  <input type="email" id="email" placeholder="demo@info.com">
+                                              </div>
+                                          </div>
+                                          <div class="col-md-6">
+                                              <div class="form-grp">
+                                                  <label for="phone">Your Phone</label>
+                                                  <input type="text" id="phone" placeholder="+216.00000000">
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <span class="or">Or</span>
+                                      <ul class="action">
+                                          <li>Continue with :</li>
+                                          <li><a href="#"><img src="../../assets/img/icon/google.png" alt=""></a></li>
+                                          <li><a href="#"><img src="../../assets/img/icon/twitter.png" alt=""></a></li>
+                                      </ul>
+                                      <button class="btn">Register</button>
+                                  </form>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </section>
+          <!-- login-register-area-end -->
+
+
+      </main>
+      <!-- main-area-end -->

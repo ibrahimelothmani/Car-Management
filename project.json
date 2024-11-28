@@ -1,0 +1,138 @@
+{
+  "$schema": "node_modules/nx/schemas/project-schema.json",
+  "name": "UI",
+  "projectType": "application",
+  "generators": {
+    "@schematics/angular:component": {
+      "standalone": false
+    },
+    "@schematics/angular:directive": {
+      "standalone": false
+    },
+    "@schematics/angular:pipe": {
+      "standalone": false
+    }
+  },
+  "sourceRoot": "src",
+  "prefix": "app",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:application",
+      "options": {
+        "outputPath": "dist/ui",
+        "index": "src/index.html",
+        "browser": "src/main.ts",
+        "polyfills": [
+          "zone.js"
+        ],
+        "tsConfig": "tsconfig.app.json",
+        "assets": [
+          {
+            "glob": "**/*",
+            "input": "src/assets",
+            "output": "assets"
+          }
+        ],
+        "styles": [
+          "src/styles.css",
+          "node_modules/bootstrap/dist/css/bootstrap.min.css",
+          "node_modules/animate.css/animate.min.css",
+          "node_modules/magnific-popup/dist/magnific-popup.css",
+          "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
+          "node_modules/owl.carousel/dist/assets/owl.carousel.min.css",
+          "node_modules/jquery-ui-dist/jquery-ui.min.css",
+          "node_modules/jarallax/dist/jarallax.css",
+          "node_modules/select2/dist/css/select2.min.css",
+          "node_modules/odometer/themes/odometer-theme-default.css",
+          "node_modules/aos/dist/aos.css",
+          "node_modules/slick-carousel/slick/slick.css",
+          "src/assets/css/default.css",
+          "src/assets/css/style.css",
+          "src/assets/css/responsive.css"
+        ],
+        "scripts": [
+          "node_modules/bootstrap/dist/js/bootstrap.min.js",
+          "node_modules/jquery/dist/jquery.min.js",
+          "node_modules/@popperjs/core/dist/umd/popper.min.js",
+          "node_modules/bootstrap/dist/js/bootstrap.min.js",
+          "node_modules/isotope-layout/dist/isotope.pkgd.min.js",
+          "node_modules/imagesloaded/imagesloaded.pkgd.min.js",
+          "node_modules/magnific-popup/dist/jquery.magnific-popup.min.js",
+          "node_modules/select2/dist/js/select2.min.js",
+          "node_modules/owl.carousel/dist/owl.carousel.min.js",
+          "node_modules/odometer/odometer.min.js",
+          "node_modules/jarallax/dist/jarallax.min.js",
+          "node_modules/slick-carousel/slick/slick.min.js",
+          "node_modules/wowjs/dist/wow.min.js",
+          "node_modules/aos/dist/aos.js",
+          "src/assets/js/jquery.accrue.min.js",
+          "src/assets/js/plugins.js",
+          "src/assets/js/main.js"
+        ],
+        "server": "src/main.server.ts",
+        "prerender": true,
+        "ssr": {
+          "entry": "server.ts"
+        }
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kB",
+              "maximumError": "1MB"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kB",
+              "maximumError": "4kB"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "UI:build:production"
+        },
+        "development": {
+          "buildTarget": "UI:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n"
+    },
+    "test": {
+      "executor": "@angular-devkit/build-angular:karma",
+      "options": {
+        "polyfills": [
+          "zone.js",
+          "zone.js/testing"
+        ],
+        "tsConfig": "tsconfig.spec.json",
+        "assets": [
+          {
+            "glob": "**/*",
+            "input": "public"
+          }
+        ],
+        "styles": [
+          "src/styles.css"
+        ],
+        "scripts": []
+      }
+    }
+  }
+}
