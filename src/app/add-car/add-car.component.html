@@ -1,0 +1,95 @@
+<div class="container">
+    <h1 class="text-center">Add New Car</h1>
+  
+    <div *ngIf="loading" class="loading-spinner">
+      Adding car, please wait...
+    </div>
+  
+    <div *ngIf="!loading">
+      <form [formGroup]="carForm" (ngSubmit)="addNewCar()" id="add-car-form">
+        <div class="mb-3">
+          <label class="form-label">Car Name</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Enter car name"
+            formControlName="nom"
+          />
+          <div *ngIf="nom.invalid && (nom.dirty || nom.touched)" class="text-danger">
+            Car name is required.
+          </div>
+        </div>
+  
+        <div class="mb-3">
+          <label class="form-label">Car Image</label>
+          <input
+            type="file"
+            class="form-control"
+            formControlName="image"
+            (change)="onSelectFile($event)"
+          />
+          <div *ngIf="image.invalid && (image.dirty || image.touched)" class="text-danger">
+            Car image is required.
+          </div>
+        </div>
+  
+        <div class="mb-3">
+          <label class="form-label">Model</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Enter car model"
+            formControlName="model"
+          />
+        </div>
+  
+        <div class="mb-3">
+          <label class="form-label">Price</label>
+          <input
+            type="number"
+            class="form-control"
+            placeholder="Enter car price"
+            formControlName="prix"
+          />
+        </div>
+  
+        <div class="mb-3">
+          <label class="form-label">Year</label>
+          <input
+            type="number"
+            class="form-control"
+            placeholder="Enter car year"
+            formControlName="annee"
+          />
+        </div>
+  
+        <div class="mb-3">
+          <label class="form-label">Description</label>
+          <textarea
+            class="form-control"
+            rows="3"
+            placeholder="Enter car description"
+            formControlName="description"
+          ></textarea>
+        </div>
+  
+        <div class="mb-3">
+          <label class="form-label">Category</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Enter car category"
+            formControlName="categorie"
+          />
+        </div>
+  
+        <button type="submit" [disabled]="carForm.invalid || loading" class="btn btn-primary">
+          Submit
+        </button>
+      </form>
+  
+      <div *ngIf="message" class="alert alert-info mt-3">{{ message }}</div>
+      <div *ngIf="error" class="alert alert-danger mt-3">{{ error }}</div>
+    </div>
+  </div>
+  

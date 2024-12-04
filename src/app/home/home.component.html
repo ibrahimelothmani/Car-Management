@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <app-menu></app-menu>
+
+      <div class="main">
+        <app-header></app-header>
+
+        <main class="content">
+          <div class="container-fluid p-0">
+            <div class="row mb-2 mb-xl-3">
+              <div class="col-auto d-none d-sm-block">
+                <h3>Dashboard</h3>
+              </div>>
+            </div>
+            <div class="row">
+              <div class="col-12 col-sm-6 col-xxl-3 d-flex">
+                <div class="card illustration flex-fill">
+                  <div class="card-body p-0 d-flex flex-fill">
+                    <div class="row g-0 w-100">
+                      <div class="col-6 align-self-end text-end">
+                        <img
+                          src="../../assets/img/illustrations/customer-support.png"
+                          alt="Customer Support"
+                          class="img-fluid illustration-img"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-6 col-xxl-3 d-flex">
+                <div class="card flex-fill">
+                  <div class="card-body py-4">
+                    <div class="d-flex align-items-start">
+                      <div class="flex-grow-1">
+                        <h3 class="text-center">Admins</h3>
+                        <p class="text-center">{{totalAdmin}}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-6 col-xxl-3 d-flex">
+                <div class="card flex-fill">
+                  <div class="card-body py-4">
+                    <div class="d-flex align-items-start">
+                      <div class="flex-grow-1">
+                        <h3 class="text-center">Client</h3>
+                        <p class="text-center">{{totalCandidat}}</p>
+                      </div>
+  
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-6 col-xxl-3 d-flex">
+                <div class="card flex-fill">
+                  <div class="card-body py-4">
+                    <div class="d-flex align-items-start">
+                      <div class="flex-grow-1">
+                        <h3 class="text-center">Contact</h3>
+                        <p class="text-center">{{totalContact}}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+        <app-footer></app-footer>
+      </div>
+      
+    </div>
+
+  </body>
+</html>

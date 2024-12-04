@@ -1,0 +1,103 @@
+
+    <div class="wrapper">
+      <app-menu></app-menu>
+
+      <div class="main">
+        <app-header></app-header>
+
+        <main class="content">
+          <div class="container-fluid p-0">
+            <h1 class="h3 mb-3">ADD ADMIN</h1>
+
+            <div class="row">
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-body">
+                    <div *ngIf="loading" class="loading-spinner">
+                      Loading admin details...
+                    </div>
+                    
+                    <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+                    <form
+                      (ngSubmit)=" updateAdmin()"
+                      [formGroup]="updateForm"
+                      id="add-admin-form"
+                    >
+                      <div class="mb-3">
+                        <label class="form-label">Id</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="id"
+                          formControlName="id"
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Nom</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="nom"
+                          formControlName="nom"
+                        />
+                        <div *ngIf="nom.invalid && (nom.dirty || nom.touched)" class="text-danger">
+                          Nom is required.
+                        </div>
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Prenom</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="prenom"
+                          formControlName="prenom"
+                        />
+                        <div *ngIf="prenom.invalid && (prenom.dirty || prenom.touched)" class="text-danger">
+                          Nom is required.
+                        </div>
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input
+                          type="email"
+                          class="form-control"
+                          placeholder="Enter email"
+                          formControlName="email"
+                        />
+                        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="text-danger">
+                          Nom is required.
+                        </div>
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Password</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="password"
+                          formControlName="mdp"
+                        />
+                        <div *ngIf="mdp.invalid && (mdp.dirty || mdp.touched)" class="text-danger">
+                          Nom is required.
+                        </div>
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Role</label>
+                        <select class="form-control" formControlName="role">
+                          <option>Select role</option>
+                          <option value="admin">Admin</option>
+                          <option value="moderator">Moderator</option>
+                        </select>
+                      </div>
+                      <button type="submit" [disabled]="updateForm.invalid || loading" class="btn btn-primary">
+                        Modifier
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+        <app-footer></app-footer>
+      </div>
+    </div>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  data-bs-theme="dark"
+  data-layout="fluid"
+  data-sidebar-theme="dark"
+  data-sidebar-position="left"
+  data-sidebar-behavior="sticky"
+>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta
+      name="description"
+      content="Responsive Bootstrap 5 Admin &amp; Dashboard Template"
+    />
+    <meta name="author" content="Bootlab" />
+
+    <title>Sign In</title>
+    <!-- END SETTINGS -->
+  </head>
+
+  <body>
+    <div class="container-fluid p-0">
+      <div class="row g-0">
+        <div class="col-xl-12">
+          <div class="auth-full-page d-flex p-4 p-xl-5">
+            <div class="d-flex flex-column w-100 h-100">
+              <div class="auth-form">
+                <div class="text-center">
+                  <h1 class="h2">Welcome back!</h1>
+                  <p class="lead">Sign in to your account to continue</p>
+                </div>
+
+                <div class="mb-3">
+                  <div class="d-grid gap-2 mb-3">
+                    <a
+                      class="btn btn-facebook btn-lg position-relative shadow"
+                      href="dashboard-default-2.html"
+                    >
+                      <i class="fab fa-fw fa-facebook fs-3 float-start"></i>
+                      <span class="position-absolute mx-auto w-100 left-0"
+                        >Continue with Facebook</span
+                      >
+                    </a>
+                    <a
+                      class="btn btn-google btn-lg position-relative shadow"
+                      href="dashboard-default-2.html"
+                    >
+                      <i
+                        class="fab fa-fw fa-google fa-google-colored fs-3 float-start"
+                      ></i>
+                      <span class="position-absolute mx-auto w-100 left-0"
+                        >Continue with Google</span
+                      >
+                    </a>
+                    <a
+                      class="btn btn-apple btn-lg position-relative shadow"
+                      href="dashboard-default-2.html"
+                    >
+                      <i class="fab fa-fw fa-apple fs-3 float-start"></i>
+                      <span class="position-absolute mx-auto w-100 left-0"
+                        >Continue with Apple</span
+                      >
+                    </a>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <hr />
+                    </div>
+                    <div
+                      class="col-auto text-uppercase d-flex align-items-center"
+                    >
+                      Or
+                    </div>
+                    <div class="col">
+                      <hr />
+                    </div>
+                  </div>
+                  <form (ngSubmit)="login()" [formGroup]="loginForm">
+                    <div class="mb-3">
+                      <label class="form-label">Email</label>
+                      <input
+                        class="form-control form-control-lg"
+                        type="email"
+                        name="email"
+                        placeholder="Enter your email"
+                        formControlName = "email"
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label">Password</label>
+                      <input
+                        class="form-control form-control-lg"
+                        type="password"
+                        name="password"
+                        placeholder="Enter your password"
+                        formControlName = "mdp"
+                      />
+                      <small>
+                        <a href="auth-reset-password-cover.html"
+                          >Forgot password?</a
+                        >
+                      </small>
+                    </div>
+                    <div>
+                      <div class="form-check align-items-center">
+                        <input
+                          id="customControlInline"
+                          type="checkbox"
+                          class="form-check-input"
+                          value="remember-me"
+                          name="remember-me"
+                          checked
+                        />
+                        <label
+                          class="form-check-label text-small"
+                          for="customControlInline"
+                          >Remember me</label
+                        >
+                      </div>
+                    </div>
+                    <div class="d-grid gap-2 mt-3">
+                      <button type="submit" class="btn btn-lg btn-primary">Sign in</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

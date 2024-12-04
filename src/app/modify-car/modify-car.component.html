@@ -1,0 +1,141 @@
+
+    <div class="wrapper">
+      <app-menu></app-menu>
+
+      <div class="main">
+        <app-header></app-header>
+
+        <main class="content">
+          <div class="container-fluid p-0">
+            <h1 class="h3 mb-3">Ajouter une Voiture</h1>
+
+            <div class="row">
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-body">
+                    <div *ngIf="loading" class="loading-spinner">
+                      Ajout en cours, veuillez patienter...
+                    </div>
+
+                    <div *ngIf="!loading">
+                      <form
+                        (ngSubmit)="updateCar()"
+                        [formGroup]="CarForm"
+                        id="add-car-form"
+                      >
+                        <div class="mb-3">
+                          <label class="form-label">ID</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="ID"
+                            formControlName="id"
+                          />
+                        </div>
+
+                        <div class="mb-3">
+                          <label class="form-label">Nom</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Nom"
+                            formControlName="nom"
+                          />
+                          <div *ngIf="nom.invalid && (nom.dirty || nom.touched)" class="text-danger">
+                            Nom est obligatoire.
+                          </div>
+                        </div>
+
+                        <div class="mb-3">
+                          <label class="form-label">Modèle</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Modèle"
+                            formControlName="model"
+                          />
+                          <div *ngIf="model.invalid && (model.dirty || model.touched)" class="text-danger">
+                            Modèle est obligatoire.
+                          </div>
+                        </div>
+
+                        <div class="mb-3">
+                          <label class="form-label">Année</label>
+                          <input
+                            type="number"
+                            class="form-control"
+                            placeholder="Année"
+                            formControlName="annee"
+                          />
+                          <div *ngIf="annee.invalid && (annee.dirty || annee.touched)" class="text-danger">
+                            Année est obligatoire.
+                          </div>
+                        </div>
+
+                        <div class="mb-3">
+                          <label class="form-label">Prix</label>
+                          <input
+                            type="number"
+                            class="form-control"
+                            placeholder="Prix"
+                            formControlName="prix"
+                          />
+                          <div *ngIf="prix.invalid && (prix.dirty || prix.touched)" class="text-danger">
+                            Prix est obligatoire.
+                          </div>
+                        </div>
+
+                        <div class="mb-3">
+                          <label class="form-label">Description</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Description"
+                            formControlName="description"
+                          />
+                          <div *ngIf="description.invalid && (description.dirty || description.touched)" class="text-danger">
+                            Description est obligatoire.
+                          </div>
+                        </div>
+
+                        <div class="mb-3">
+                          <label class="form-label">Catégorie</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Catégorie"
+                            formControlName="categorie"
+                          />
+                          <div *ngIf="categorie.invalid && (categorie.dirty || categorie.touched)" class="text-danger">
+                            Catégorie est obligatoire.
+                          </div>
+                        </div>
+
+                        <div class="mb-3">
+                          <label class="form-label">Image</label>
+                          <input
+                            type="file"
+                            class="form-control"
+                            formControlName="image"
+                            (change)="onSelectFile($event)"
+                          />
+                          <div *ngIf="image.invalid && (image.dirty || image.touched)" class="text-danger">
+                            Image est obligatoire.
+                          </div>
+                        </div>
+
+                        <button type="submit" [disabled]="CarForm.invalid || loading" class="btn btn-primary">
+                          Ajouter
+                        </button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+
+        <app-footer></app-footer>
+      </div>
+    </div>

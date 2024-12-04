@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin</title>
+
+  </head>
+
+  <body>
+    <div class="wrapper">
+<app-menu></app-menu>
+      <div class="main">
+        <app-header></app-header>
+
+        <main class="content">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Prénom</th>
+                <th scope="col">Email</th>
+                <th scope="col">Role</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let admin of listAdmin">
+                <td>{{ admin.id }}</td>
+                <td>{{ admin.nom }}</td>
+                <td>{{ admin.prenom }}</td>
+                <td>{{ admin.email }}</td>
+                <td>{{ admin.role }}</td>
+                <td>
+                  <button (click)="Modifyadmin(admin)" type="submit" class="btn btn-success">Modify</button>
+                  <button (click)="Deleteadmin(admin)" type="submit" class="btn btn-danger">Delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </main>
+        <app-footer></app-footer>
+      </div>
+    </div>
+  </body>
+</html>

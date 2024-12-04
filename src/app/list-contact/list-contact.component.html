@@ -1,0 +1,34 @@
+
+    <div class="wrapper">
+      <app-menu></app-menu>
+      <div class="main">
+        <app-header></app-header>
+
+        <main class="content">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Email</th>
+                <th scope="col">Message</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let contact of listContact">
+                <td>{{ contact.id }}</td>
+                <td>{{ contact.nom }}</td>
+                <td>{{ contact.email }}</td>
+                <td>{{ contact.message }}</td>
+                <td>
+                  <button type="button" class="btn btn-success">Modify</button>
+                  <button (click)="Deletecontact(contact)" type="submit" class="btn btn-danger">Delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </main>
+        <app-footer></app-footer>
+      </div>
+    </div>

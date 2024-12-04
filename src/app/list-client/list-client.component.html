@@ -1,0 +1,41 @@
+<div class="wrapper">
+  <app-menu></app-menu>
+  <div class="main">
+    <app-header></app-header>
+
+    <main class="content">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Prénom</th>
+            <th scope="col">Email</th>
+            <th scope="col">telephone</th>
+            <th scop="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let client of listClient">
+            <td>{{ client.id }}</td>
+            <td>{{ client.nom }}</td>
+            <td>{{ client.prenom }}</td>
+            <td>{{ client.email }}</td>
+            <td>{{ client.telephone }}</td>
+            <td>
+              <button type="button" class="btn btn-success">Modify</button>
+              <button
+                (click)="Deleteclient(client)"
+                type="submit"
+                class="btn btn-danger"
+              >
+                Delete
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+    <app-footer></app-footer>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<nav class="navbar navbar-expand navbar-bg">
+    <a class="sidebar-toggle">
+      <i class="hamburger align-self-center"></i>
+    </a>
+  
+    <div class="navbar-collapse collapse">
+      <ul class="navbar-nav navbar-align">
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle d-none d-sm-inline-block"
+            href="#"
+            data-bs-toggle="dropdown"
+          >
+            <img
+              src="../../assets/img/avatars/avatar.jpg"
+              class="img-fluid rounded-circle me-1 mt-n2 mb-n2"
+              alt="Chris Wood"
+              width="40"
+              height="40"
+            />
+            <span>{{userDetails.nom}} {{userDetails.prenom}} || {{userDetails.role}}</span>
+          </a>
+          <div class="dropdown-menu dropdown-menu-end">
+            <a class="dropdown-item" (click)="logout()">Log out</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
