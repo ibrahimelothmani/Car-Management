@@ -14,45 +14,44 @@ import { ListCarComponent } from './list-car/list-car.component';
 import { AuthGuard } from './service/authguard';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
+  {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full',
+  },
+  { path: 'login', component: LoginComponent },
+  {
+    path: 'home',
+    canActivate: [AuthGuard],
+  },
   {
     path: 'addadmin',
     component: AddAdminComponent,
-    canActivate: [AuthGuard],
-    data: { roles: ['admin'] }, // Requires 'admin' role
   },
   {
-    path: 'modify',
+    path: 'modifyadmin',
     component: ModifyAdminComponent,
-    canActivate: [AuthGuard],
-    data: { roles: ['admin', 'editor'] }, // Requires either 'admin' or 'editor' role
-  },
-  { path: 'admin', component: ListAdminComponent, canActivate: [AuthGuard] },
-  {
-    path: 'client',
-    component: ListClientComponent,
-    canActivate: [AuthGuard],
-    data: { roles: ['client-manager'] }, // Requires 'client-manager' role
-  },
-  {
-    path: 'contact',
-    component: ListContactComponent,
-    canActivate: [AuthGuard],
-  },
-  { path: 'car', component: ListCarComponent, canActivate: [AuthGuard] },
-  {
-    path: 'addcar',
-    component: AddCarComponent,
-    canActivate: [AuthGuard],
-    data: { roles: ['car-manager'] }, // Requires 'car-manager' role
   },
   {
     path: 'modifycar',
     component: ModifyCarComponent,
-    canActivate: [AuthGuard],
   },
-  { path: 'login', component: LoginComponent },
-  { path: '**', component: PageNotFoundComponent, canActivate: [AuthGuard] },
+  { path: 'admin', component: ListAdminComponent },
+  {
+    path: 'client',
+    component: ListClientComponent,
+  },
+  {
+    path: 'contact',
+    component: ListContactComponent,
+  },
+  { path: 'car', component: ListCarComponent },
+  {
+    path: 'addcar',
+    component: AddCarComponent,
+  },
+
+  { path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({

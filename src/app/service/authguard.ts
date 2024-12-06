@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
+import {
+  CanActivate,
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot,
+  Router,
+} from '@angular/router';
 import { KeycloakService } from 'keycloak-angular';
 
 @Injectable({
@@ -8,7 +13,10 @@ import { KeycloakService } from 'keycloak-angular';
 export class AuthGuard implements CanActivate {
   constructor(private keycloak: KeycloakService, private router: Router) {}
 
-  async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
+  async canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): Promise<boolean> {
     const isAuthenticated = await this.keycloak.isLoggedIn();
 
     if (!isAuthenticated) {
