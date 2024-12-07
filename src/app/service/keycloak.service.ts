@@ -12,7 +12,7 @@ export class KeycloakService {
   get keycloak(): Keycloak {
     if (!this._keycloak) {
       const keycloakConfig: KeycloakConfig = {
-        url: 'http://localhost:9090/auth',
+        url: 'http://localhost:9090',
         realm: 'car-management',
         clientId: 'car',
       };

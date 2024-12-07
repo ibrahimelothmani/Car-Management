@@ -41,7 +41,7 @@
                             placeholder="Nom"
                             formControlName="nom"
                           />
-                          <div *ngIf="nom.invalid && (nom.dirty || nom.touched)" class="text-danger">
+                          <div *ngIf="nom.invalid && (nom.dirty)" class="text-danger">
                             Nom est obligatoire.
                           </div>
                         </div>
@@ -54,7 +54,7 @@
                             placeholder="Modèle"
                             formControlName="model"
                           />
-                          <div *ngIf="model.invalid && (model.dirty || model.touched)" class="text-danger">
+                          <div *ngIf="model.invalid && (model.dirty)" class="text-danger">
                             Modèle est obligatoire.
                           </div>
                         </div>
@@ -67,7 +67,7 @@
                             placeholder="Année"
                             formControlName="annee"
                           />
-                          <div *ngIf="annee.invalid && (annee.dirty || annee.touched)" class="text-danger">
+                          <div *ngIf="annee.invalid && (annee.dirty)" class="text-danger">
                             Année est obligatoire.
                           </div>
                         </div>
@@ -80,7 +80,7 @@
                             placeholder="Prix"
                             formControlName="prix"
                           />
-                          <div *ngIf="prix.invalid && (prix.dirty || prix.touched)" class="text-danger">
+                          <div *ngIf="prix.invalid && (prix.dirty)" class="text-danger">
                             Prix est obligatoire.
                           </div>
                         </div>
@@ -93,7 +93,7 @@
                             placeholder="Description"
                             formControlName="description"
                           />
-                          <div *ngIf="description.invalid && (description.dirty || description.touched)" class="text-danger">
+                          <div *ngIf="description.invalid && (description.dirty)" class="text-danger">
                             Description est obligatoire.
                           </div>
                         </div>
@@ -106,7 +106,7 @@
                             placeholder="Catégorie"
                             formControlName="categorie"
                           />
-                          <div *ngIf="categorie.invalid && (categorie.dirty || categorie.touched)" class="text-danger">
+                          <div *ngIf="categorie.invalid && (categorie.dirty)" class="text-danger">
                             Catégorie est obligatoire.
                           </div>
                         </div>
@@ -119,7 +119,7 @@
                             formControlName="image"
                             (change)="onSelectFile($event)"
                           />
-                          <div *ngIf="image.invalid && (image.dirty || image.touched)" class="text-danger">
+                          <div *ngIf="image.invalid && (image.dirty)" class="text-danger">
                             Image est obligatoire.
                           </div>
                         </div>

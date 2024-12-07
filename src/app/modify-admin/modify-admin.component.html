@@ -16,7 +16,7 @@
                     <div *ngIf="loading" class="loading-spinner">
                       Loading admin details...
                     </div>
-                    
+
                     <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
                     <form
                       (ngSubmit)=" updateAdmin()"
@@ -40,7 +40,7 @@
                           placeholder="nom"
                           formControlName="nom"
                         />
-                        <div *ngIf="nom.invalid && (nom.dirty || nom.touched)" class="text-danger">
+                        <div *ngIf="nom.invalid && (nom.dirty)" class="text-danger">
                           Nom is required.
                         </div>
                       </div>
@@ -52,7 +52,7 @@
                           placeholder="prenom"
                           formControlName="prenom"
                         />
-                        <div *ngIf="prenom.invalid && (prenom.dirty || prenom.touched)" class="text-danger">
+                        <div *ngIf="prenom.invalid && (prenom.dirty)" class="text-danger">
                           Nom is required.
                         </div>
                       </div>
@@ -64,7 +64,7 @@
                           placeholder="Enter email"
                           formControlName="email"
                         />
-                        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="text-danger">
+                        <div *ngIf="email.invalid && (email.dirty)" class="text-danger">
                           Nom is required.
                         </div>
                       </div>
@@ -76,7 +76,7 @@
                           placeholder="password"
                           formControlName="mdp"
                         />
-                        <div *ngIf="mdp.invalid && (mdp.dirty || mdp.touched)" class="text-danger">
+                        <div *ngIf="mdp.invalid && (mdp.dirty)" class="text-danger">
                           Nom is required.
                         </div>
                       </div>

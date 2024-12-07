@@ -88,14 +88,4 @@ export class CrudService {
     return userInfo ? userInfo : null;
   }
 
-  // Get the Keycloak token
-  getToken() {
-    return this.keycloakService.getKeycloakInstance().token;
-  }
-
-  // Check if the user is logged in
-  isLoggedIn(): boolean {
-    const token = localStorage.getItem('myToken');
-    return !!token; // Simplified the token check
-  }
 }

@@ -52,7 +52,7 @@ export class ModifyAdminComponent {
     this.loading = true; // Start loading spinner
     let idEvent = this.router.snapshot.params['id'];
     this.id = idEvent;
-    
+
     this.service.findAdminById(idEvent).subscribe({
       next: (result) => {
         let event = result;
@@ -77,7 +77,7 @@ export class ModifyAdminComponent {
     if (this.updateForm.invalid) {
       return; // Prevent submission if the form is invalid
     }
-    
+
     let data = this.updateForm.value;
     let admin = new Admin(this.id, data.nom, data.prenom, data.email, data.mdp, data.role);
 
