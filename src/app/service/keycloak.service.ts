@@ -1,58 +1,49 @@
-import { Injectable } from '@angular/core';
-import Keycloak, { KeycloakConfig, KeycloakProfile } from 'keycloak-js';
-import { Admin } from '../Entity/admin';
+import {Injectable} from '@angular/core';
+import Keycloak from 'keycloak-js';
+import {UserProfile} from './user-profile';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class KeycloakService {
   private _keycloak: Keycloak | undefined;
-  private _admin: Admin | undefined;
 
-  get keycloak(): Keycloak {
+  get keycloak() {
     if (!this._keycloak) {
-      const keycloakConfig: KeycloakConfig = {
+      this._keycloak = new Keycloak({
         url: 'http://localhost:9090',
         realm: 'car-management',
-        clientId: 'car',
-      };
-      this._keycloak = new Keycloak(keycloakConfig);
+        clientId: 'car'
+      });
     }
     return this._keycloak;
   }
 
-  get admin(): Admin | undefined {
-    return this._admin;
+  private _profile: UserProfile | undefined;
+
+  get profile(): UserProfile | undefined {
+    return this._profile;
   }
 
-  async init(): Promise<void> {
+  async init() {
     const authenticated = await this.keycloak.init({
       onLoad: 'login-required',
-      checkLoginIframe: false,  // Disable if causing issues
+      checkLoginIframe: false, // Disable the iframe check
+
     });
 
     if (authenticated) {
-      const profile = await this.keycloak.loadUserProfile();
-      this._admin = profile as unknown as Admin;
-      this._admin.token = this.keycloak.token || '';
-
-      // Perform additional setup
-      this.initAppState();
-    } else {
-      console.error('Keycloak initialization failed');
+      this._profile = (await this.keycloak.loadUserProfile()) as UserProfile;
+      this._profile.token = this.keycloak.token || '';
     }
   }
 
-  login(): Promise<void> {
+  login() {
     return this.keycloak.login();
   }
 
-  logout(): Promise<void> {
-    return this.keycloak.logout({ redirectUri: 'http://localhost:4200' });
-  }
-
-  private initAppState() {
-    // Initialize application state that depends on user authentication
-    console.log('Initializing application state');
+  logout() {
+    // this.keycloak.accountManagement();
+    return this.keycloak.logout({redirectUri: 'http://localhost:4200'});
   }
 }
