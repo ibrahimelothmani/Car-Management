@@ -1,4 +1,4 @@
 package ibrahim.car.management.service;
 
-public interface CarServiceInterface {
+public class ContactService {
 }

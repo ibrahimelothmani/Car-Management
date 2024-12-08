@@ -19,12 +19,13 @@ import java.util.List;
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
     private String name;
     private String password;
-    private String phone;
+    private Integer phone;
     private String email;
     private String address;
     @OneToMany
+    @JoinColumn(name = "cars")
     private List<Car> cars;
 }

@@ -1,26 +1,22 @@
 package ibrahim.car.management.model;
 
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Lob;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table (name= "purchase")
-public class Purchase {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  Integer id;
-    @ManyToOne
-    private Client client;
-    @ManyToOne
-    private Car car;
+@Builder
+@Table(name = "purchase_rq")
+public class PurchaseRq {
+    private  Integer idClient;
+    private  Integer idCar;
     @Column(columnDefinition = "LONGTEXT")
     @Lob
     private String card;

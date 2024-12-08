@@ -1,4 +1,4 @@
 package ibrahim.car.management.controller;
 
-public class AdminContoller {
+public class ContactContoller {
 }

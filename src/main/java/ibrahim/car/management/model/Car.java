@@ -16,16 +16,16 @@ import lombok.NoArgsConstructor;
 public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
     private String name;
     private String model;
     private String color;
 
     @ManyToOne
+    @JoinColumn(name = "client")
     private Client client;
-
-    private double price;
-    private boolean available;
+    private Double price;
+    private Boolean available;
 
 
 }
