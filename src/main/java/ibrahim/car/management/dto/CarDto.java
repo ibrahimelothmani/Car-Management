@@ -1,4 +1,4 @@
 package ibrahim.car.management.dto;
 
-public record AdminDto() {
+public record CarDto() {
 }

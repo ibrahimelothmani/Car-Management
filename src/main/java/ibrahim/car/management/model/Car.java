@@ -7,24 +7,25 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Entity
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table (name = "client")
-
-public class Client {
+@Data
+@Table (name = "car")
+public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String password;
-    private String phone;
-    private String email;
-    private String address;
-    @OneToMany
-    private List<Car> cars;
+    private String model;
+    private String color;
+
+    @ManyToOne
+    private Client client;
+
+    private double price;
+    private boolean available;
+
+
 }
