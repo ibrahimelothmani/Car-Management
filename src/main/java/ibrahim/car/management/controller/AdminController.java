@@ -1,5 +1,6 @@
 package ibrahim.car.management.controller;
 
+import ibrahim.car.management.dto.*;
 import ibrahim.car.management.model.*;
 import ibrahim.car.management.repository.AdminRepository;
 import ibrahim.car.management.service.AdminService;
@@ -31,11 +32,11 @@ public class AdminController {
         this.adminRepository = adminRepository;
     }
     @PostMapping("/add")
-    public ResponseEntity<Map<String, Object>> loginAdmin(@RequestBody Admin admin) {
+    public ResponseEntity<Map<String, Object>> loginAdmin(@RequestBody AdminDto admin) {
         System.out.println("in login-admin"+admin);
         HashMap<String, Object> response = new HashMap<>();
 
-        Admin userFromDB = adminRepository.findAdminByEmail(admin.getEmail());
+        AdminDto userFromDB = AdminDto.fromEntity(adminRepository.findAdminByEmail(admin.getEmail()));
         System.out.println("userFromDB+admin"+userFromDB);
         if (userFromDB == null) {
             response.put("message", "Admin not found !");
@@ -67,81 +68,80 @@ public class AdminController {
 
     // Add a new admin
     @RequestMapping(method = RequestMethod.POST )
-    ResponseEntity<?> addAdmin (@RequestBody Admin admin){
+    ResponseEntity<?> addAdmin (@RequestBody AdminDto admin){
         HashMap<String, Object> response = new HashMap<>();
         if(adminRepository.existsByEmail(admin.getEmail())){
             response.put("MESSAGE", "EMAIL ALREADY EXIST !");
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
         }else{
             admin.setPassword(this.bCryptPasswordEncoder.encode(admin.getPassword()));
-            Admin savedUser = adminRepository.save(admin);
+            AdminDto savedUser = AdminDto.fromEntity(adminRepository.save(admin).toEntity();
             return ResponseEntity.status(HttpStatus.CREATED).body(savedUser);}
     }
 
     @RequestMapping(value = "/{id}" ,method = RequestMethod.PUT)
-    public Admin updateadmin(@PathVariable("id")Long id, @RequestBody Admin admin){
+    public AdminDto updateadmin(@PathVariable("id")Long id, @RequestBody AdminDto admin){
         admin.setPassword(this.bCryptPasswordEncoder.encode(admin.getPassword()));
-        Admin savedUser = adminRepository.save(admin);
-        Admin newAdmin = adminService.updateAdmin(admin);
-        return newAdmin;
+        AdminDto savedUser = AdminDto.fromEntity(adminRepository.save(admin);
+        return AdminDto.fromEntity(adminService.updateAdmin(admin);
     }
 
     // Get all admins
     @GetMapping("/admins")
-    public List<Admin> getAllAdmins() {
+    public List<AdminDto> getAllAdmins() {
         return adminService.getAllAdmin();
     }
 
     // Get admin by ID
     @GetMapping("/admins/{id}")
-    public ResponseEntity<Admin> getAdminById(@PathVariable int id) {
+    public ResponseEntity<AdminDto> getAdminById(@PathVariable int id) {
         Optional<Object> admin = adminService.getAdminById(id);
-        return admin.isPresent() ? ResponseEntity.ok((Admin) admin.get()) : ResponseEntity.notFound().build();
+        return admin.map(o -> ResponseEntity.ok(AdminDto.fromEntity((Admin) o))).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
 
     // Remove admin by ID
     @DeleteMapping("/admins/{id}")
     public ResponseEntity<Void> removeAdmin(@PathVariable int id) {
-        Admin admin = adminService.removeAdmin(id);
-        return admin != null ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
+        AdminDto admin = AdminDto.fromEntity(adminService.removeAdmin(id).toEntity());
+        return ResponseEntity.noContent().build();
     }
 
     // Get all clients
     @GetMapping("/clients")
-    public List<Client> getAllClients() {
+    public List<ClientDto> getAllClients() {
         return adminService.getAllClient();
     }
 
     // Get all cars
     @GetMapping("/cars")
-    public List<Car> getAllCars() {
+    public List<CarDto> getAllCars() {
         return adminService.getAllCar();
     }
 
     // Get all contacts
     @GetMapping("/contacts")
-    public List<Contact> getAllContacts() {
+    public List<ContactDto> getAllContacts() {
         return adminService.getAllContact();
     }
 
     // Get all purchases
     @GetMapping("/purchases")
-    public List<Purchase> getAllPurchases() {
+    public List<PurchaseDto> getAllPurchases() {
         return adminService.getAllPurchase();
     }
 
     // Remove a car by ID
     @DeleteMapping("/cars/{id}")
     public ResponseEntity<Void> removeCar(@PathVariable int id) {
-        Car car = adminService.removeCar(id);
-        return car != null ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
+        CarDto car = CarDto.fromEntity(adminService.removeCar(id).toEntity());
+        return ResponseEntity.noContent().build();
     }
 
     // Remove a contact by ID
     @DeleteMapping("/contacts/{id}")
     public ResponseEntity<Void> removeContact(@PathVariable int id) {
-        Contact contact = adminService.removeContact(id);
-        return contact != null ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
+        ContactDto contact = ContactDto.fromEntity(adminService.removeContact(id).toEntity());
+        return ResponseEntity.noContent().build();
     }
 }

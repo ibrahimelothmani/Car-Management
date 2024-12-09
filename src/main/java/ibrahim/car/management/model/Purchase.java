@@ -18,10 +18,13 @@ public class Purchase {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Integer id;
     @ManyToOne
+    @JoinColumn(name = "client")
     private Client client;
     @ManyToOne
+    @JoinColumn(name = "cars")
     private Car car;
     @Column(columnDefinition = "LONGTEXT")
     @Lob
     private String card;
+
 }

@@ -1,5 +1,6 @@
 package ibrahim.car.management.service;
 
+import ibrahim.car.management.dto.*;
 import ibrahim.car.management.model.*;
 import ibrahim.car.management.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,55 +26,55 @@ public class AdminService {
         this.purchaseRepository = purchaseRepository;
     }
 
-    public List<Admin> getAllAdmin(){
+    public List<AdminDto> getAllAdmin(){
         return adminRepository.findAll();
     }
 
     public Optional<Object> getAdminById(int id){
         return adminRepository.findById(id);
     }
-    public List<Client> getAllClient(){
+    public List<ClientDto> getAllClient(){
         return clientRepository.findAll();
     }
-    public List<Car> getAllCar(){
+    public List<CarDto> getAllCar(){
         return carRepository.findAll();
     }
-    public List<Contact> getAllContact(){
+    public List<ContactDto> getAllContact(){
         return contactRepository.findAll();
     }
-    public List<Purchase> getAllPurchase(){
+    public List<PurchaseDto> getAllPurchase(){
         return purchaseRepository.findAll();
     }
-    public Admin addAdmin(Admin admin){
+    public AdminDto addAdmin(AdminDto admin){
         return adminRepository.save(admin);
     }
 
-    public Admin updateAdmin(Admin admin){
+    public AdminDto updateAdmin(AdminDto admin){
         return adminRepository.save(admin);
     }
 
-    public Admin removeAdmin(int id){
-        Admin admin = (Admin) adminRepository.findById(id).orElse(null);
+    public AdminDto removeAdmin(int id){
+        Object admin = adminRepository.findById(id).orElse(null);
         if(admin!=null){
-            adminRepository.delete(admin);
+            adminRepository.delete(id);
         }
-        return admin;
+        return (AdminDto) admin;
     }
-    public Car updateCar(int id){
-        return carRepository.save(id);
+    public CarDto updateCar(int id){
+        return CarDto.fromEntity(carRepository.save(id));
     }
-    public Car removeCar(int id){
-        Car car = (Car) carRepository.findById(id).orElse(null);
+    public CarDto removeCar(int id){
+        CarDto car = (CarDto) carRepository.findById(id).orElse(null);
         if(car!=null){
-            carRepository.delete(car);
+            carRepository.delete(car.toEntity());
         }
         return car;
     }
 
-    public Contact removeContact(int id){
-        Contact contact = (Contact) contactRepository.findById(id).orElse(null);
+    public ContactDto removeContact(int id){
+        ContactDto contact = (ContactDto) contactRepository.findById(id).orElse(null);
         if(contact!=null){
-            contactRepository.delete(contact);
+            contactRepository.delete(contact.toEntity());
         }
         return contact;
     }

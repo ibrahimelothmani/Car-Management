@@ -1,5 +1,6 @@
 package ibrahim.car.management.repository;
 
+import ibrahim.car.management.dto.AdminDto;
 import ibrahim.car.management.model.Admin;
 import org.springframework.stereotype.Repository;
 
@@ -9,10 +10,10 @@ import java.util.Optional;
 @Repository
 public interface AdminRepository {
 
-    void delete(Admin admin);
+    void delete(int admin);
     Optional<Object> findById(int id);
-    Admin save(Admin admin);
-    List<Admin> findAll();
+    AdminDto save(AdminDto admin);
+    List<AdminDto> findAll();
     boolean existsByEmail(String email);
     Admin findAdminByEmail(String email);
 }
