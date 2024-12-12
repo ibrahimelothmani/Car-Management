@@ -1,49 +1,52 @@
 package ibrahim.car.management.service;
 
-import ibrahim.car.management.model.Car;
-import ibrahim.car.management.model.Client;
+import ibrahim.car.management.dto.PurchaseDto;
 import ibrahim.car.management.model.Purchase;
-import ibrahim.car.management.model.PurchaseRq;
 import ibrahim.car.management.repository.PurchaseRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PurchaseService {
 
     private final PurchaseRepository purchaseRepository;
 
-    private final ClientService clientService;
-    private final CarService carService;
-
-    public PurchaseService(PurchaseRepository purchaseRepository, ClientService clientService, CarService carService) {
+    @Autowired
+    public PurchaseService(PurchaseRepository purchaseRepository) {
         this.purchaseRepository = purchaseRepository;
-        this.clientService = clientService;
-        this.carService = carService;
     }
 
-    public Purchase addPurchase(PurchaseRq purchase){
-        Optional<Car> car = Optional.ofNullable(carService.getCarById(purchase.getIdCar()));
-        Optional<Client> client = clientService.getClientById(purchase.getIdClient());
-        if(client.isPresent() && car.isPresent()){
-            if(!this.purchaseRepository.existsByClientIdAndCarId(purchase.getIdClient(),purchase.getIdCar()))
-                return purchaseRepository.save(new Purchase());
-            else return null;
-        }
-        else
-            return null;
+    public ResponseEntity<PurchaseDto> getPurchaseById(int id) {
+        Optional<Purchase> purchase = purchaseRepository.findById(id);
+        return purchase.map(value -> ResponseEntity.ok(PurchaseDto.fromEntity(value)))
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
     }
 
-    public List<Purchase> getAllPurchases() {
-        return purchaseRepository.findAll();
+    public List<PurchaseDto> getAllPurchases() {
+        List<Purchase> purchases = purchaseRepository.findAll();
+        return purchases.stream().map(PurchaseDto::fromEntity).collect(Collectors.toList());
     }
 
-    public List<Purchase> GetCarByClient(Long id){
-        return purchaseRepository.findByClientId(id);
+    public PurchaseDto addPurchase(PurchaseDto purchaseDto) {
+        Purchase purchase = purchaseDto.toEntity();
+        Purchase savedPurchase = purchaseRepository.save(purchase);
+        return PurchaseDto.fromEntity(savedPurchase);
     }
-    public Purchase getPurchaseById(Long id) {
-        return (Purchase) purchaseRepository.findById(id).orElse(null);
+
+    public PurchaseDto updatePurchase(int id, PurchaseDto purchaseDto) {
+        Purchase purchase = purchaseDto.toEntity();
+        purchase.setId(id);
+        Purchase updatedPurchase = purchaseRepository.save(purchase);
+        return PurchaseDto.fromEntity(updatedPurchase);
+    }
+
+    public void removePurchase(int id) {
+        purchaseRepository.deleteById(id);
     }
 }

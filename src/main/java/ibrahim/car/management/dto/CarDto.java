@@ -1,37 +1,46 @@
 package ibrahim.car.management.dto;
 
 import ibrahim.car.management.model.Car;
+import ibrahim.car.management.model.Client;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-public record CarDto(
-        Integer id,
-        String name,
-        String model,
-        String color,
-        ClientDto client,
-        Double price,
-        Boolean available
-) {
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class CarDto {
+    private Integer id;
+    private String name;
+    private String model;
+    private String color;
+    private Double price;
+    private Boolean available;
+    private Integer clientId;
+
     public static CarDto fromEntity(Car car) {
-        return new CarDto(
-                car.getId(),
-                car.getName(),
-                car.getModel(),
-                car.getColor(),
-                ClientDto.fromEntity(car.getClient()), // Convert Client entity to ClientDto
-                car.getPrice(),
-                car.getAvailable()
-        );
+        return CarDto.builder()
+                .id(car.getId())
+                .name(car.getName())
+                .model(car.getModel())
+                .color(car.getColor())
+                .price(car.getPrice())
+                .available(car.getAvailable())
+                .clientId(car.getClient() != null ? car.getClient().getId() : null)
+                .build();
     }
 
     public Car toEntity() {
         return Car.builder()
-                .id(id)
-                .name(name)
-                .model(model)
-                .color(color)
-                .client(client != null ? client.toEntity() : null) // Convert ClientDto back to Client, check if client is not null
-                .price(price)
-                .available(available)
+                .id(this.id)
+                .name(this.name)
+                .model(this.model)
+                .color(this.color)
+                .price(this.price)
+                .available(this.available)
+                .client(this.clientId != null ? Client.builder().id(this.clientId).build() : null)
                 .build();
     }
 }

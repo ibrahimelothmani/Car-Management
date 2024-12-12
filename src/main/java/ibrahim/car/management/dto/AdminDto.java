@@ -6,29 +6,26 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Builder
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-
 public class AdminDto {
     private Integer id;
     private String username;
     private String password;
     private String email;
 
-
     public static AdminDto fromEntity(Admin admin) {
-        return new AdminDto(
-                admin.getId(),
-                admin.getUsername(),
-                admin.getPassword(),
-                admin.getEmail()
-        );
+        return AdminDto.builder()
+                .id(admin.getId())
+                .username(admin.getUsername())
+                .password(admin.getPassword())
+                .email(admin.getEmail())
+                .build();
     }
 
-
-    public Admin toEntity(){
+    public Admin toEntity() {
         return Admin.builder()
                 .id(this.id)
                 .username(this.username)
@@ -36,5 +33,4 @@ public class AdminDto {
                 .email(this.email)
                 .build();
     }
-
 }

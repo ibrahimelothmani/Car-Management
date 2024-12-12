@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "purchase_rq")
+
 public class PurchaseRq {
     private  Integer idClient;
     private  Integer idCar;

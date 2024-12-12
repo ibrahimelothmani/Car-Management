@@ -1,13 +1,21 @@
 package ibrahim.car.management.dto;
 
 import ibrahim.car.management.model.Contact;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-public record ContactDto(
-        Integer id,
-        String name,
-        String email,
-        String message
-) {
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+
+public class ContactDto {
+        private Integer id;
+        private String name;
+        private String email;
+        private String message;
     public static ContactDto fromEntity(Contact contact){
         return new ContactDto(
                 contact.getId(),

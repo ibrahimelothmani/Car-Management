@@ -1,35 +1,40 @@
 package ibrahim.car.management.dto;
 
-import ibrahim.car.management.model.Car;
 import ibrahim.car.management.model.Client;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-public record ClientDto(
-        Integer id,
-        String name,
-        String password,
-        Integer phone,
-        String email,
-        String address,
-        List<CarDto> cars // Changed to List<CarDto> to handle multiple cars
-) {
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class ClientDto {
+    private Integer id;
+    private String name;
+    private String password;
+    private Integer phone;
+    private String email;
+    private String address;
+    private List<CarDto> cars;
+
     public static ClientDto fromEntity(Client client) {
-        return new ClientDto(
-                client.getId(),
-                client.getName(),
-                client.getPassword(),
-                client.getPhone(),
-                client.getEmail(),
-                client.getAddress(),
-                client.getCars().stream()
-                        .map(CarDto::fromEntity)
-                        .collect(Collectors.toList()) // Collect all cars into a list
-        );
+        return ClientDto.builder()
+                .id(client.getId())
+                .name(client.getName())
+                .password(client.getPassword())
+                .phone(client.getPhone())
+                .email(client.getEmail())
+                .address(client.getAddress())
+                .cars(client.getCars().stream().map(CarDto::fromEntity).collect(Collectors.toList()))
+                .build();
     }
 
-    public Client toEntity() { // Removed the argument to avoid confusion
+    public Client toEntity() {
         return Client.builder()
                 .id(this.id)
                 .name(this.name)
@@ -37,9 +42,7 @@ public record ClientDto(
                 .phone(this.phone)
                 .email(this.email)
                 .address(this.address)
-                .cars(this.cars.stream()
-                        .map(CarDto::toEntity) // Convert each CarDto to Car
-                        .collect(Collectors.toList())) // Collect into a list of Car
+                .cars(this.cars.stream().map(CarDto::toEntity).collect(Collectors.toList()))
                 .build();
     }
 }

@@ -1,6 +1,7 @@
 package ibrahim.car.management.model;
 
 
+import ibrahim.car.management.dto.CarDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,6 +27,5 @@ public class Car {
     private Client client;
     private Double price;
     private Boolean available;
-
 
 }

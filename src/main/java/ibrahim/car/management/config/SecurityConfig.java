@@ -1,67 +1,47 @@
 package ibrahim.car.management.config;
 
-import org.keycloak.adapters.springboot.KeycloakSpringBootConfigResolver;
-import org.keycloak.adapters.springsecurity.authentication.KeycloakAuthenticationProvider;
-import org.keycloak.adapters.springsecurity.management.HttpSessionManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
-import org.springframework.security.oauth2.client.web.OAuth2AuthorizedClientRepository;
+import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
+import org.springframework.security.oauth2.core.AuthorizationGrantType;
+import org.springframework.security.oauth2.core.oidc.endpoint.OidcParameterNames;
 import org.springframework.security.web.SecurityFilterChain;
+
+import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
-    // Configure HttpSecurity using SecurityFilterChain bean
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .authorizeHttpRequests(authorizeRequests ->
-                        authorizeRequests
-                                .requestMatchers("/admin/**").hasRole("admin")  // Restrict access to admin role
-                                .requestMatchers("/user/**").hasRole("user")   // Restrict access to user role
-                                .anyRequest().authenticated()  // Require authentication for all other requests
+        http.authorizeHttpRequests(authorizeRequests ->
+                        authorizeRequests.anyRequest().authenticated()
                 )
-                .oauth2Login(oauth2Login -> oauth2Login
-                        .clientRegistrationRepository(clientRegistrationRepository()));
+                .oauth2Login(withDefaults());
         return http.build();
     }
 
-    // Register Keycloak authentication provider with Spring Security
-    @Bean
-    public KeycloakAuthenticationProvider keycloakAuthenticationProvider() {
-        return new KeycloakAuthenticationProvider();
-    }
-
-    // Keycloak-specific session manager
-    @Bean
-    public HttpSessionManager httpSessionManager() {
-        return new HttpSessionManager();
-    }
-
-    // Optional: Keycloak Spring Boot config resolver (if you need more control over Keycloak config)
-    @Bean
-    public KeycloakSpringBootConfigResolver keycloakSpringBootConfigResolver() {
-        return new KeycloakSpringBootConfigResolver();
-    }
-
-    // Configure OAuth2 client registration repository if needed (for integration with OAuth2)
     @Bean
     public ClientRegistrationRepository clientRegistrationRepository() {
-        // Configure the repository for OAuth2 client registration, this could be autoconfigured by Spring Boot
-        return null;
-    }
+        ClientRegistration clientRegistration = ClientRegistration
+                .withRegistrationId("google")
+                .clientId("your-client-id")
+                .clientSecret("your-client-secret")
+                .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
+                .redirectUri("{baseUrl}/login/oauth2/code/{registrationId}")
+                .scope("profile", "email")
+                .authorizationUri("https://accounts.google.com/o/oauth2/auth")
+                .tokenUri("https://oauth2.googleapis.com/token")
+                .userInfoUri("https://www.googleapis.com/oauth2/v3/userinfo")
+                .userNameAttributeName(OidcParameterNames.ID_TOKEN)
+                .clientName("Google")
+                .build();
 
-    // Optional: Configure the OAuth2 authorized client repository
-    @Bean
-    public OAuth2AuthorizedClientRepository oAuth2AuthorizedClientRepository() {
-        // Configure authorized client repository
-        return null;
+        return new InMemoryClientRegistrationRepository(clientRegistration);
     }
 }
-
-
-
