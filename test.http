@@ -1,5 +1,15 @@
-### GET request to example server
-GET https://examples.http-client.intellij.net/get
-    ?generated-in=IntelliJ IDEA
+### ADD ADMIN
+POST http://localhost:8081/api/admin/add
+Content-Type: application/json
+
+{
+  "username": "Ibrahim",
+  "password": "2024",
+  "email": "ibrahim@email.com"
+}
+
+### LOGIN
+POST http://localhost:8081/api/auth/login
+Content-Type: application/json
 
 ###

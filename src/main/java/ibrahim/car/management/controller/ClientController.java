@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/client")
@@ -39,7 +38,6 @@ public class ClientController {
             response.put("message", "Email already exists!");
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
-
         clientDto.setPassword(bCryptPasswordEncoder.encode(clientDto.getPassword()));
         ClientDto savedClient = clientService.addClient(clientDto);
         Map<String, Object> response = new HashMap<>();

@@ -6,7 +6,7 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: root
       PGDATA: /var/lib/postgresql/data
-      POSTGRES_DB: car_management
+      POSTGRES_DB: car-management
     volumes:
       - postgres:/data/postgres
     ports:

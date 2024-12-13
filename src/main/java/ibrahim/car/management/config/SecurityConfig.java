@@ -3,45 +3,32 @@ package ibrahim.car.management.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.oauth2.client.registration.ClientRegistration;
-import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
-import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
-import org.springframework.security.oauth2.core.AuthorizationGrantType;
-import org.springframework.security.oauth2.core.oidc.endpoint.OidcParameterNames;
 import org.springframework.security.web.SecurityFilterChain;
 
-import static org.springframework.security.config.Customizer.withDefaults;
-
 @Configuration
-@EnableWebSecurity
 public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests(authorizeRequests ->
-                        authorizeRequests.anyRequest().authenticated()
+        http
+                .csrf(csrf -> csrf.disable())  // Disable CSRF protection (be cautious with this)
+                .authorizeHttpRequests(authz -> authz
+                        .requestMatchers("/login").permitAll()  // Allow access to the login page
+                        .requestMatchers("/api/**").permitAll()  // Allow all API endpoints without authentication
+                        .anyRequest().authenticated()  // Require authentication for other requests
                 )
-                .oauth2Login(withDefaults());
+                .formLogin(formLogin -> formLogin
+                        .loginPage("/login")  // Ensure this is the correct login page URL
+                        .permitAll()  // Allow everyone to access the login page
+                        .defaultSuccessUrl("/dashboard", true)  // Redirect to /dashboard after successful login
+                        .failureUrl("/login?error=true")  // Redirect to /login with an error param if login fails
+                )
+                .logout(logout -> logout
+                        .logoutUrl("/logout")  // Enable a logout URL
+                        .logoutSuccessUrl("/login?logout=true")  // Redirect to login page after successful logout
+                        .permitAll()
+                );
+
         return http.build();
-    }
-
-    @Bean
-    public ClientRegistrationRepository clientRegistrationRepository() {
-        ClientRegistration clientRegistration = ClientRegistration
-                .withRegistrationId("google")
-                .clientId("your-client-id")
-                .clientSecret("your-client-secret")
-                .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
-                .redirectUri("{baseUrl}/login/oauth2/code/{registrationId}")
-                .scope("profile", "email")
-                .authorizationUri("https://accounts.google.com/o/oauth2/auth")
-                .tokenUri("https://oauth2.googleapis.com/token")
-                .userInfoUri("https://www.googleapis.com/oauth2/v3/userinfo")
-                .userNameAttributeName(OidcParameterNames.ID_TOKEN)
-                .clientName("Google")
-                .build();
-
-        return new InMemoryClientRegistrationRepository(clientRegistration);
     }
 }
