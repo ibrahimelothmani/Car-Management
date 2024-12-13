@@ -1,15 +1,41 @@
-### ADD ADMIN
-POST http://localhost:8081/api/admin/add
+### Login Admin
+POST http://localhost:8088/api/admin/login
 Content-Type: application/json
 
 {
-  "username": "Ibrahim",
-  "password": "2024",
-  "email": "ibrahim@email.com"
+  "email": "admin@example.com",
+  "password": "password123"
 }
 
-### LOGIN
-POST http://localhost:8081/api/auth/login
+### Add Admin
+POST http://localhost:8080/api/admin/add
 Content-Type: application/json
 
-###
+{
+  "name": "ibrahim",
+  "email": "newadmin@example.com",
+  "password": "2024"
+}
+
+### Update Admin
+PUT http://localhost:8080/api/admin/1
+Content-Type: application/json
+Authorization: Bearer <YOUR_ACCESS_TOKEN>
+
+{
+  "name": "Updated Admin",
+  "email": "updatedadmin@example.com",
+  "password": "updatedpassword123"
+}
+
+### Get All Admins
+GET http://localhost:8080/api/admin/admins
+Authorization: Bearer <c75920d7-1231-437c-aad8-2455c3b61f39>
+
+### Get Admin by ID
+GET http://localhost:8080/api/admin/admins/1
+Authorization: Bearer <c75920d7-1231-437c-aad8-2455c3b61f39>
+
+### Remove Admin
+DELETE http://localhost:8080/api/admin/admins/1
+Authorization: Bearer <c75920d7-1231-437c-aad8-2455c3b61f39>
