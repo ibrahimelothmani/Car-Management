@@ -27,28 +27,34 @@ const routes: Routes = [
   {
     path: 'addadmin',
     component: AddAdminComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'modifyadmin',
     component: ModifyAdminComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'modifycar',
     component: ModifyCarComponent,
+    canActivate: [AuthGuard],
   },
-  { path: 'admin', component: ListAdminComponent },
+  { path: 'admin', component: ListAdminComponent, canActivate: [AuthGuard] },
   {
     path: 'client',
     component: ListClientComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'contact',
     component: ListContactComponent,
+    canActivate: [AuthGuard],
   },
-  { path: 'car', component: ListCarComponent },
+  { path: 'car', component: ListCarComponent, canActivate: [AuthGuard] },
   {
     path: 'addcar',
     component: AddCarComponent,
+    canActivate: [AuthGuard],
   },
 
   { path: '**', component: PageNotFoundComponent },

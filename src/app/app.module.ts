@@ -17,14 +17,10 @@ import { MenuComponent } from './menu/menu.component';
 import { ModifyAdminComponent } from './modify-admin/modify-admin.component';
 import { ModifyCarComponent } from './modify-car/modify-car.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { KeycloakService } from './service/keycloak.service';
-import { HttpTokenInterceptor } from './service/http-token.interceptor';
-
-export function kcFactory(kcService: KeycloakService) {
-  return () => kcService.init();
-}
+import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
+import { initializer } from './service/keycloak-init';
 
 @NgModule({
   declarations: [
@@ -50,20 +46,15 @@ export function kcFactory(kcService: KeycloakService) {
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    KeycloakAngularModule
   ],
   providers: [
-    HttpClient,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: HttpTokenInterceptor,
-      multi: true
-    },
     {
       provide: APP_INITIALIZER,
+      useFactory: initializer,
       deps: [KeycloakService],
-      useFactory: kcFactory,
-      multi: true
-    }
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent]
 })

@@ -1,44 +1,48 @@
 import { Injectable } from '@angular/core';
 import {
-  CanActivate,
-  ActivatedRouteSnapshot,
-  RouterStateSnapshot,
-  Router,
+    ActivatedRouteSnapshot,
+    Router,
+    RouterStateSnapshot,
 } from '@angular/router';
-import { KeycloakService } from 'keycloak-angular';
+import { KeycloakAuthGuard, KeycloakService } from 'keycloak-angular';
 
 @Injectable({
-  providedIn: 'root',
+    providedIn: 'root',
 })
-export class AuthGuard implements CanActivate {
-  constructor(private keycloak: KeycloakService, private router: Router) {}
-
-  async canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): Promise<boolean> {
-    const isAuthenticated = await this.keycloak.isLoggedIn();
-
-    if (!isAuthenticated) {
-      // Redirect to Keycloak login if not authenticated
-      await this.keycloak.login({
-        redirectUri: window.location.origin + state.url, // Redirect back to attempted route after login
-      });
-      return false;
+export class AuthGuard extends KeycloakAuthGuard {
+    constructor(
+        protected override readonly router: Router,
+        protected readonly keycloak: KeycloakService
+    ) {
+        super(router, keycloak);
     }
 
-    // Check roles if specified in route data
-    const requiredRoles = route.data['roles'];
-    if (requiredRoles && !this.hasRequiredRoles(requiredRoles)) {
-      this.router.navigate(['/login']); // Redirect if user lacks required roles
-      return false;
+    public async isAccessAllowed(
+        route: ActivatedRouteSnapshot,
+        state: RouterStateSnapshot
+    ) {
+        if (!this.authenticated) {
+            await this.keycloak.login({
+                redirectUri: window.location.origin + state.url,
+            });
+        }
+
+        // Get the roles required from the route.
+        const requiredRoles = route.data['roles'];
+
+        // Allow the user to to proceed if no additional roles are required to access the route.
+        if (!(requiredRoles instanceof Array) || requiredRoles.length === 0) {
+            return true;
+        }
+
+        // Allow the user to proceed if all the required roles are present.
+        if (requiredRoles.every((role) => this.roles.includes(role))) {
+            return true;
+        } else {
+            // redirect to error page if the user doesn't have the nessecairy  role to access
+            // we will define this routes in a bit
+            this.router.navigate(['/login']);
+            return false;
+        }
     }
-
-    return true;
-  }
-
-  private hasRequiredRoles(requiredRoles: string[]): boolean {
-    const userRoles = this.keycloak.getUserRoles();
-    return requiredRoles.every((role) => userRoles.includes(role));
-  }
 }

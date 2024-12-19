@@ -6,13 +6,14 @@ import { Car } from '../Entity/car';
 import { Client } from '../Entity/client';
 import { Contact } from '../Entity/contact';
 import { KeycloakService } from 'keycloak-angular';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CrudService {
 
-  private apiUrl = 'http://localhost:8080';
+  private apiUrl = environment.baseUrl;
   private loginUserUrl = `${this.apiUrl}/api/admin/login`;
 
   constructor(private http: HttpClient, private keycloakService: KeycloakService) {}
