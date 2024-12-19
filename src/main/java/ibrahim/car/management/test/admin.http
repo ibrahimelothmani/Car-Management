@@ -1,0 +1,8 @@
+POST http://localhost:8088/api/admin/add
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "password",
+  "email": "admin@gmail.com"
+}
